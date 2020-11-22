@@ -1,9 +1,9 @@
 //
-//  main.cpp
+// main.cpp
 //
-// Problem_22.cpp
+// Problem_22
 //
-//  Created by Aurimas Nausedas on 10/15/19.
+// Created by Aurimas Nausedas on 10/15/19.
 
 #include <iostream>
 #include <iomanip> // kad galeciau kontroliuoti formatavima
