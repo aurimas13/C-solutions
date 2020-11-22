@@ -1,0 +1,348 @@
+//
+// Problem_18.c
+//
+//  Created by Aurimas Nausedas on 9/20/19.
+
+#ifndef PLOT_H
+#define PLOT_H
+#include <math.h>
+#include <string.h>
+#include <graphics.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+//goes to main.cpp
+#include <conio.h>
+
+void init();
+
+class Plot
+{
+public:
+    Plot(int lxp, int lyp,int xd, int yd, // lango matmenys pixeliais
+         double lminX, double lmaxX, double ldeltaX,
+         double lminY, double lmaxY, double ldeltaY,
+         int lsp, int lspt);
+    void on();
+    void act();
+    double Xmin(){return minX;}
+    double Xmax(){return maxX;}
+    double Xdel(){return deltaX;}
+    double Fmin(){return minY;}
+    double Fmax(){return maxY;}
+    double Fdel(){return deltaY;}
+    int fx(double x);
+    int fy(double y);
+    void point(double x, double y, int spalva);
+    void start(double x, double y);
+    void draw(double x, double y);
+    void legend(double x, double y, double pix, char mystr[]);
+private:
+    int xp,yp,xg,yg,sp,spt;
+    double XtoP, YtoP,
+    minX, maxX,deltaX,
+    minY,maxY,deltaY;
+
+};
+
+#endif // ifndef PLOT_H
+
+// ================================================================================
+// ================================================================================
+// ================================================================================
+
+
+// plot.cpp
+// class Plot
+// Grafiko langas
+// is Algirdo Matulio knygos Mokomes programuoti 128 psl.
+
+//#include "plot.h"
+
+//******************************************************
+void init() // Grafine moda
+{
+    int Gd, Gm, ErCo;
+    Gd=DETECT;
+    initgraph(&Gd, &Gm, "c:\\TC\\BGI");
+    ErCo=graphresult();
+    if ( ErCo != grOk)
+    {
+        printf("Nera grafikos");
+        exit(1);
+    }
+}
+
+// Klases Plot funkcijos ******************************
+Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pixeliais
+           double lminX, double lmaxX, double ldeltaX,
+           double lminY, double lmaxY, double ldeltaY,
+           int lsp, int lspt)
+{
+    xp = lxp;
+    yp = lyp;
+    xg = xp + xd; // pixeliais
+    yg = yp + yd; // pixeliais
+    sp = lsp; // fillstyle number
+    spt = lspt;
+    minX = lminX; // vienetais x asyje
+    maxX = lmaxX; // vienetais x asyje
+    deltaX = ldeltaX; // groteliu plotis
+    minY = lminY; // vienetais y asyje
+    maxY = lmaxY; // vienetais y asyje
+    deltaY = ldeltaY; // groteliu plotis
+
+    // daugini atstuma x vienetais is XtoP ir gauni pixelius
+    XtoP = ((double)(xg - xp - 39)) / (maxX - minX);
+
+    // daugini atstuma y vienetais is XtoP ir gauni pixelius
+    YtoP = ((double)(yg - yp - 39)) / (maxY - minY);
+
+}
+
+// ------------------------------------------------------
+void Plot::on()
+{
+    double Xst, Yst, a, b;
+    int r, l, rb;
+    char s[20]; // for storing floats as strings later
+
+    // visa (max) ekrana uzpildau pasirinkta spalva
+    setviewport(0, 0, getmaxx(), getmaxy(), 1); // max screen coord.
+    // sita perkelciau i atskira funkcija
+    // jei butu poreikis kelis subplots padaryti
+    setfillstyle(SOLID_FILL, sp); //set the current viewport for
+    // graphics output, absolute coord
+    bar(xp, yp, xg, yg); // rectangle filled
+
+    // pasirinkta staciakampi (pixeliais) apibreziu remu
+    setviewport(xp, yp, xg, yg, 1);
+    Xst = deltaX * ceil(minX / deltaX);// pirmo bruksneliu padetis
+    Yst = deltaY * ceil(minY / deltaY); // pirmo bruksneliu padetis
+    setcolor(0);
+    setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
+    rectangle(20, 20, xg - xp - 20, yg - yp - 19);// remas
+
+    // X asies pavadinimai
+    for (a = Xst; a < maxX; a += deltaX)
+    {
+        r = fx(a); // zingsniuoju pasirinktais vnt, bet piesiu pixeliais
+        b = fabs(fmod(a, 5 * deltaX)) / deltaX; // absolute, modulo
+        if ((b < 0.1) || (b > 4.9))
+        {
+            rb = 10;
+            if (fabs(a) < deltaX/2)
+            {
+                a = 0;
+            }
+
+            // prepare x label as string
+            gcvt(a, 4, s); // float to string
+            l = strlen(s);
+            settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
+
+            // atspaudinama xticklabel
+            outtextxy(r + 16 - l / 2, yg - yp - 10, s);
+        }
+        else
+        {
+            rb = 5; // kiek islinde solid black tik
+        }
+
+        // trumpi juodi ticks
+        line(r + 20, 20, r + 20, 20 + rb); // virsuje
+        line(r + 20, yg - yp - 20 - rb, r + 20, yg - yp - 20); // apacioje
+
+        if((r != 0) && (r != xg - xp - 40)) //jei ne remo krastai
+        {
+            setcolor(spt);
+            setlinestyle(DOTTED_LINE, 0, NORM_WIDTH);
+            line(r + 20, 20 + rb, r + 20, yg - yp - 20 - rb);
+            setcolor(0);
+            setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
+        }
+    }
+
+    // analogiskai su y-asimi
+    for(a = Yst; a < maxY; a += deltaY)
+    {
+        r = fy(a);
+        b = fabs(fmod(a, 5 * deltaY)) / deltaY;
+        if ((b <0.1) || (b > 4.9))
+        {
+            rb = 10;
+            if (fabs(a) < deltaY / 2)
+            {
+                a = 0;
+            }
+            gcvt(a, 4, s);
+            l = strlen(s);
+            settextstyle(DEFAULT_FONT, VERT_DIR, 1);
+            outtextxy(13, r + 17 + 1 / 2, s);
+        }
+
+        else
+        {
+            rb = 5;
+        }
+
+        line(20, r + 20, 20 + rb, r + 20);
+        line(xg - xp - 20 - rb, r + 20, xg - xp - 20, r + 20);
+        if((r != 0) && (r != yg - yp - 39))
+        {
+            setcolor(spt);
+            setlinestyle(DOTTED_LINE, 0, NORM_WIDTH);
+            line(xg - xp - 20 - rb, r + 20, 20 + rb, r + 20);
+
+            //return to previous default state
+            setcolor(0);
+            setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
+        }
+    }
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
+    act();
+}
+
+// ----------------------------------------------------------
+void Plot::act()
+{
+    // paskutinis - clip
+    // activuojama placiau
+    setviewport(xp + 20, yp + 20, xg - 20, yg - 20, 1);
+}
+
+// ----------------------------------------------------------
+int Plot::fx(double x)
+{
+    // padeti ekrane pixeliais pakeicia i padet x-asyje (regis)
+    return (int)(floor(XtoP * (x - minX)));
+}
+
+// ----------------------------------------------------------
+int Plot::fy(double y)
+{
+    return (int)(yg - yp - 39 - floor(YtoP * (y - minY)));
+}
+// ----------------------------------------------------------
+
+void Plot::point(double x, double y, int spalva)
+{
+    // pades taska tam tikroje vietoje
+    putpixel(fx(x), fy(y), spalva);
+}
+
+// ----------------------------------------------------------
+void Plot::start(double x, double y)
+{
+    moveto(fx(x),fy(y));
+}
+
+// ----------------------------------------------------------
+void Plot::draw(double x, double y)
+{
+    lineto(fx(x),fy(y));
+}
+
+// ----------------------------------------------------------
+void Plot::legend(double x, double y, double pix, char mystr[])
+{
+    //short line
+    double xprev = getx();
+    double yprev = gety();
+
+    setlinestyle(0, 0, THICK_WIDTH);
+    line(x,y,x+pix,y);
+    setlinestyle(0, 0, NORM_WIDTH);
+
+    // text
+    outtextxy(x + 2. * pix, y,mystr);
+
+    //go back
+    moveto(xprev,yprev);
+}
+
+// ================================================================================
+// ================================================================================
+// ================================================================================
+
+//
+//  PROG_12.cpp
+//
+//
+//  Created by Rapolas Zilionis on 9/24/18.
+//
+
+/*
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+
+#include "plot.h"
+
+ */
+#include <string.h>
+
+double fk(double x,double n);
+
+int main()
+{
+
+    // ivairiaspalves 1/(x/n) funkcijos, kur n = 1,...,5
+    int sk = 500; //zingsniu sk
+    double  Xmin = 0,
+    Xmax = 10,
+    Xdel = 1;
+    double  Ymin = 0,
+    Ymax = 10,
+    Ydel = 1;
+
+    char leg[20]; // pavadinimams
+
+    double x,f;
+    double h = (Xmax - Xmin) / sk; // Zingsnis
+
+    init();
+
+    Plot T(0,0,getmaxx(),getmaxy(), // Lango matmenys
+           Xmin, Xmax, Xdel,        // X asis
+           Ymin, Ymax, Ydel,        // Y asis
+           15, 13);                 // Fonas ir tinklelis
+
+    T.on();
+    getch();
+
+
+    for (int n = 1; n < 6; n++)
+    {
+        x = Xmin;
+        f = fk(x,n);
+        T.start(x,f);
+        setcolor(n);
+
+
+        for (int i = 1; i <= sk; i++)
+        {
+            x = Xmin + i * h;
+            f = fk(x,n);
+            T.draw(x,f);
+            char legfull[40] = "n/x, kur n = ";
+            gcvt(n,0,leg);
+            strcat(legfull,leg);
+
+            T.legend(getmaxx()-200,n * 20, 10, legfull);
+        }
+        getch();
+    }
+
+
+    getch();
+    closegraph();
+    return 0;
+
+}
+
+// ---------------------------------
+double fk(double x,double n)
+{
+    return n/(x);
+}

@@ -1,0 +1,46 @@
+//
+// Problem_18.h
+//
+//  Created by Aurimas Nausedas on 9/24/19.
+
+#ifndef _PLOT_H
+#define _PLOT_H
+
+// headeryje reiktu vengti naudoti nereikalingus #include
+// mistake 5a: http://www.acodersjourney.com/2016/05/top-10-c-header-file-mistakes-and-how-to-fix-them/
+
+
+void init();
+
+class Plot
+{
+public:
+    Plot(int lxp, int lyp,int xd, int yd, // lango matmenys pixeliais
+         double lminX, double lmaxX, double ldeltaX,
+         double lminY, double lmaxY, double ldeltaY,
+         int lsp, int lspt);
+    void on();
+    void act();
+    double Xmin(){return minX;}
+    double Xmax(){return maxX;}
+    double Xdel(){return deltaX;}
+    double Fmin(){return minY;}
+    double Fmax(){return maxY;}
+    double Fdel(){return deltaY;}
+    int fx(double x);
+    int fy(double y);
+    void point(double x, double y, int spalva);
+    void start(double x, double y);
+    void draw(double x, double y);
+
+    // by RZ: draw legend
+    void legend(double x, double y, double pix, char mystr[]);
+
+private:
+    int xp,yp,xg,yg,sp,spt;
+    double XtoP, YtoP,
+    minX, maxX,deltaX,
+    minY,maxY,deltaY;
+};
+
+#endif // ifndef PLOT_H
