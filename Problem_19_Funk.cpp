@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "P19FUNK.h"
+#include "Problem_19_Funk.h"
 
 
 //******************************************************
