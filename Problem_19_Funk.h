@@ -1,5 +1,5 @@
 //
-// P19FUNK.h
+// Problem_19_Funk.h
 //
 //  Created by Aurimas Nausedas on 9/28/19.
 
