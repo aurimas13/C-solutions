@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "P19FUNK.h"
+#include "PROBLEM_19_FUNK.h"
 
 
 // deklaruoju pagalbines funkcijas
