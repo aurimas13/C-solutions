@@ -3,8 +3,8 @@
 //
 //  Created by Aurimas Nausedas on 9/28/19.
 
-#ifndef P19FUNK_h
-#define P19FUNK_h
+#ifndef PROBLEM_19_FUNK_h
+#define PROBLEM_19_FUNK_h
 
 #include <stdio.h>
 
