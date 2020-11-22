@@ -1,8 +1,9 @@
 //
 // Problem_19_v0.cpp
 //
-//  Created by Aurimas Nausedas on 9/28/19.#include <stdio.h>
+//  Created by Aurimas Nausedas on 9/28/19.
 
+#include <stdio.h>
 #include <conio.h>
 #include <graphics.h>
 #include <stdlib.h>
