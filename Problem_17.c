@@ -1,7 +1,7 @@
 //
 // Problem_17.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
 // Pixel graphics
 
 #include <stdio.h>
