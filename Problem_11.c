@@ -1,4 +1,4 @@
-///
+//
 // Problem_11.c
 //
 //  Created by Aurimas Nausedas on 9/20/19.
