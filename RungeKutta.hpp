@@ -1,0 +1,45 @@
+//
+//  main.hpp
+//
+// Problem_20.cpp All in one
+//
+//  Created by Aurimas Nausedas on 9/28/19.
+
+#ifndef RungeKutta_hpp
+#define RungeKutta_hpp
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+class RungeKutta
+{
+public:
+    //konstruktorius
+    RungeKutta(double lt, double lh, int ln);
+
+    //destruktorius
+    ~RungeKutta();
+
+    double& operator[](int i){return x[i];};
+
+    //virtuali funkcija
+
+
+    virtual void fk(const double *lx, double *lf) = 0;
+    void step();
+    double get_t(){return t;};
+protected:
+    double t; // pradinis laikas t
+
+    // dinamine masyvu alokacija
+    double *x; // Rodykle i integruojamas funkcijas
+    double *xt; // Rodykle i integruojamas funkcijas sekanciame taske
+    double *f; // Rodykle i integralo apitikres vertes
+    double *ft; // Rodykle i f vertes sekanciame taske
+
+    double h; // zingsnio dydis
+    int n; //lygciu skaicius
+};
+
+#endif /* RungeKutta_hpp */
