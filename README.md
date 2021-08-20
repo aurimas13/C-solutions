@@ -1,4 +1,4 @@
-# C-solutions
+# Solutions of C/C++ exercises/projects#
 
 I am a Research Associate at Vilnius University working on programming, bioinformatics and computational chemistry projects writing codes and scripting with Python and C++.
 
