@@ -1,8 +1,8 @@
 # Solutions of C/C++ exercises/projects#
 
-I am a Research Associate at Vilnius University working on programming, bioinformatics and computational chemistry projects writing codes and scripting with Python and C++.
+I am a Research Engineer at Vilnius University working on programming, bioinformatics and computational chemistry projects writing codes and scripting with Python and C++.
 
-Here are the C/C++ solutions of the problems given by the Physics Department on the C/C++ programming course. Here you will find a total of 24 solved problems throughout my work as RA from 2016 to 2019.
+Here are the C/C++ solutions of the problems given by the Physics Department on the C/C++ programming course when I worked at VU as Research Associate. Here you will find a total of 24 solved problems throughout my work as RA from 2016 to 2019.
 
 Most explanations are in Lithuanian that will be transalted to English when I find time. 
 
