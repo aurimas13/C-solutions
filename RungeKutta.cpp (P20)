@@ -2,6 +2,7 @@
 //  RungeKutta.cpp
 //
 //  Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10/29/21.
 
 #include "RungeKutta.hpp"
 #include <stdio.h>
