@@ -9,7 +9,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-// konstruktorius
+// konstruktorius | constructor
 RungeKutta::RungeKutta(double lt, double lh, int ln)
 {
     t = lt;
