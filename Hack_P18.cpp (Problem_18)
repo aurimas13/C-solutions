@@ -26,7 +26,7 @@ public:
          int lsp, int lspt);
     void on();
     void act();
-    double Xmin(){return minX;}
+    double Xmin(){return minX;} 
     double Xmax(){return maxX;}
     double Xdel(){return deltaX;}
     double Fmin(){return minY;}
