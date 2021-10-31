@@ -1,7 +1,8 @@
 //
 // Problem_18.cpp
 //
-//  Created by Aurimas Nausedas on 9/24/19.
+// Created by Aurimas Nausedas on 9/24/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <math.h>
 #include <string.h>
@@ -12,7 +13,7 @@
 #include "plot.h"
 
 //******************************************************
-void init() // Grafine moda
+void init() // Grafine moda | Graphical mode
 {
     int Gd, Gm, ErCo;
     Gd=DETECT;
@@ -20,34 +21,34 @@ void init() // Grafine moda
     ErCo=graphresult();
     if ( ErCo != grOk)
     {
-        printf("Nera grafikos");
+        printf("No graphics");
         exit(1);
     }
 }
 
-// Klases Plot funkcijos ******************************
-Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pixeliais
+// Klases Plot funkcijos | Class Plot functions ******************************
+Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pixeliais | window dimensions in pixels
            double lminX, double lmaxX, double ldeltaX,
            double lminY, double lmaxY, double ldeltaY,
            int lsp, int lspt)
 {
     xp = lxp;
     yp = lyp;
-    xg = xp + xd; // pixeliais
-    yg = yp + yd; // pixeliais
+    xg = xp + xd; // pixeliais | in pixels
+    yg = yp + yd; // pixeliais | in pixels
     sp = lsp; // fillstyle number
     spt = lspt;
-    minX = lminX; // vienetais x asyje
-    maxX = lmaxX; // vienetais x asyje
-    deltaX = ldeltaX; // groteliu plotis
-    minY = lminY; // vienetais y asyje
-    maxY = lmaxY; // vienetais y asyje
-    deltaY = ldeltaY; // groteliu plotis
+    minX = lminX; // vienetais x asyje | in units in x-axis
+    maxX = lmaxX; // vienetais x asyje | in units in x-axis
+    deltaX = ldeltaX; // groteliu plotis | grid width
+    minY = lminY; // vienetais y asyje | in units in y-axis
+    maxY = lmaxY; // vienetais y asyje | in units in y-axis
+    deltaY = ldeltaY; // groteliu plotis | grid width
 
-    // daugini atstuma x vienetais is XtoP ir gauni pixelius
+    // daugini atstuma x vienetais is XtoP ir gauni pixelius | multiply the distance in x units from XtoP and get the pixels
     XtoP = ((double)(xg - xp - 39)) / (maxX - minX);
 
-    // daugini atstuma y vienetais is XtoP ir gauni pixelius
+    // daugini atstuma y vienetais is YtoP ir gauni pixelius | multiply the distance in y units from YtoP and get the pixels
     YtoP = ((double)(yg - yp - 39)) / (maxY - minY);
 
 }
@@ -58,26 +59,26 @@ void Plot::on()
     int r, l, rb;
     char s[20]; // for storing floats as strings later
 
-    // visa (max) ekrana uzpildau pasirinkta spalva
+    // visa (max) ekrana uzpildau pasirinkta spalva | fill the whole (max) screen with the selected color
     setviewport(0, 0, getmaxx(), getmaxy(), 1); // max screen coord.
-    // sita perkelciau i atskira funkcija
-    // jei butu poreikis kelis subplots padaryti
+    // sita perkelciau i atskira funkcija | I moved this to a separate function
+    // jei butu poreikis kelis subplots padaryti | if there would be a need for multiple subplots to do
     setfillstyle(SOLID_FILL, sp); //set the current viewport for
     // graphics output, absolute coord
     bar(xp, yp, xg, yg); // rectangle filled
 
-    // pasirinkta staciakampi (pixeliais) apibreziu remu
+    // pasirinkta staciakampi (pixeliais) apibreziu remu | the selected rectangle (in pixels) is defined by the frame
     setviewport(xp, yp, xg, yg, 1);
-    Xst = deltaX * ceil(minX / deltaX);// pirmo bruksneliu padetis
-    Yst = deltaY * ceil(minY / deltaY); // pirmo bruksneliu padetis
+    Xst = deltaX * ceil(minX / deltaX);// pirmo bruksneliu padetis | position of the first hyphen
+    Yst = deltaY * ceil(minY / deltaY); // pirmo bruksneliu padetis | position of the first hyphen
     setcolor(0);
     setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
     rectangle(20, 20, xg - xp - 20, yg - yp - 19);// remas
 
-    // X asies pavadinimai
+    // X asies pavadinimai | X axis names
     for (a = Xst; a < maxX; a += deltaX)
     {
-        r = fx(a); // zingsniuoju pasirinktais vnt, bet piesiu pixeliais
+        r = fx(a); // zingsniuoju pasirinktais vnt, bet piesiu pixeliais | on the selected pieces, but I tap in pixels
         b = fabs(fmod(a, 5 * deltaX)) / deltaX; // absolute, modulo
         if ((b < 0.1) || (b > 4.9))
         {
@@ -92,19 +93,19 @@ void Plot::on()
             l = strlen(s);
             settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 
-            // atspaudinama xticklabel
+            // atspaudinam/printing xticklabel 
             outtextxy(r + 16 - l / 2, yg - yp - 10, s);
         }
         else
         {
-            rb = 5; // kiek islinde solid black tik
+            rb = 5; // kiek islinde solid black tik | how much protruding solid black
         }
 
-        // trumpi juodi ticks
-        line(r + 20, 20, r + 20, 20 + rb); // virsuje
-        line(r + 20, yg - yp - 20 - rb, r + 20, yg - yp - 20); // apacioje
+        // trumpi juodi ticks | short black ticks
+        line(r + 20, 20, r + 20, 20 + rb); // virsuje | above
+        line(r + 20, yg - yp - 20 - rb, r + 20, yg - yp - 20); // apacioje | below
 
-        if((r != 0) && (r != xg - xp - 40)) //jei ne remo krastai
+        if((r != 0) && (r != xg - xp - 40)) //if no frame edges
         {
             setcolor(spt);
             setlinestyle(DOTTED_LINE, 0, NORM_WIDTH);
@@ -114,7 +115,7 @@ void Plot::on()
         }
     }
 
-    // analogiskai su y-asimi
+    // analogiskai su y-asimi | analogously wit the y-axis
     for(a = Yst; a < maxY; a += deltaY)
     {
         r = fy(a);
@@ -156,15 +157,15 @@ void Plot::on()
 // ----------------------------------------------------------
 void Plot::act()
 {
-    // paskutinis - clip
-    // activuojama placiau
+    // paskutinis/last - clip
+    // activuojama placiau | activating wider
     setviewport(xp + 20, yp + 20, xg - 20, yg - 20, 1);
 }
 
 // ----------------------------------------------------------
 int Plot::fx(double x)
 {
-    // padeti ekrane pixeliais pakeicia i padet x-asyje (regis)
+    // padeti ekrane pixeliais pakeicia i padet x-asyje (regis) | position on the screen in pixels replaces i on position x (it seems)
     return (int)(floor(XtoP * (x - minX)));
 }
 
@@ -177,7 +178,7 @@ int Plot::fy(double y)
 
 void Plot::point(double x, double y, int spalva)
 {
-    // pades taska tam tikroje vietoje
+    // pades taska tam tikroje vietoje | will put a point in a certain place
     putpixel(fx(x), fy(y), spalva);
 }
 
