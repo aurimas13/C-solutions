@@ -1,7 +1,9 @@
 //
-//  MyRungeKutta.hpp
+// MyRungeKutta.hpp
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10/31/21.
+
 
 #ifndef MyRungeKutta_hpp
 #define MyRungeKutta_hpp
