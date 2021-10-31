@@ -10,7 +10,7 @@
 #include "p13_f2.h" // hederis su f1(x) = x^2 | header with f1(x) = x^2
 
 
-// deklaruoju pagalbines funkcijas | helper functions declaration
+// deklaruoju pagalbines funkcijas | declaring helper functions
 void text();
 char mygetchar(void);
 void myclear(void);
