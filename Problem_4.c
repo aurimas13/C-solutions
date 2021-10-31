@@ -1,14 +1,14 @@
-//  Problem_4.c
+// Problem_4.c
 //
-//  Created by Aurimas Nausedas on 9/17/19.
-//
+// Created by Aurimas Nausedas on 9/17/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <ctype.h>
 
 void lentele4prat(int start, int end)
 {
-    // linija
+    // linija | line
     for (int k = 1; k <= 73; k++)
     {
         printf("-");
@@ -21,13 +21,13 @@ void lentele4prat(int start, int end)
         int j = i + 1;
 
 
-        // ar prieita lenteles kaire krastine?
+        // ar prieita lenteles kaire krastine? | have the tables been accessed on the left bank?
         if (i % 8 == 0)
         {
             printf("|");
         }
-        // pasinaudojus biblioteka ctype.h
-        // patikrinti ar zenklas spausdintinas
+        // pasinaudojus biblioteka ctype.h | using the library ctype.h
+        // patikrinti ar zenklas spausdintinas | check if the mark is printable
         if (isprint(i))
         {
             printf("%3d%5c",i,i);
@@ -52,34 +52,34 @@ void lentele4prat(int start, int end)
     {
         printf("-");
     }
-    printf("\n\"NS\" - NeSpausdinamas zenklas\n");
+    printf("\n\"NS\" - Unprintable sign\n");
 }
 
 int main()
 {
-    // pavadinimas
-    printf("ASCII simboliai nuo 0 iki 127\n");
+    // pavadinimas | name
+    printf("ASCII symbols from 0 to 127\n");
 
-    // bruksnys is lygybes zenklu
+    // bruksnys is lygybes zenklu | the hyphen of signs of equality
     for (int i = 1; i <= 73; i++)
     {
         printf("=");
     }
     printf("\n");
 
-    // pirma lentele
+    // pirma lentele | first table
     lentele4prat(0, 127);
 
-    // pavadinimas
-    printf("\n\n\nASCII simboliai nuo 128 iki 255\n");
+    // pavadinimas | name
+    printf("\n\n\ASCII symbols from 128 to 255\n");
 
-    // bruksnys is lygybes zenklu
+    // bruksnys is lygybes zenklu | the hyphen of signs of equality
     for (int i = 1; i <= 73; i++)
     {
         printf("=");
     }
     printf("\n");
 
-    // pirma lentele
+    // pirma lentele | first table
     lentele4prat(128, 255);
 }
