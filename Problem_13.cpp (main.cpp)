@@ -1,15 +1,16 @@
 //
 // Problem_13.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include "simpson.h"
-#include "p13_f1.h" // hederis su f1(x) = x
-#include "p13_f2.h" // hederis su f1(x) = x^2
+#include "p13_f1.h" // hederis su f1(x) = x | header with f1(x) = x
+#include "p13_f2.h" // hederis su f1(x) = x^2 | header with f1(x) = x^2
 
 
-// deklaruoju pagalbines funkcijas
+// deklaruoju pagalbines funkcijas | helper functions declaration
 void text();
 char mygetchar(void);
 void myclear(void);
@@ -20,8 +21,8 @@ int minimenu(void);
 
 int main()
 {
-    // hack'as: kad visada butu panasiai centruotas menu
-    // pirma atspausdinu tusciu liniju
+    // hack'as: kad visada butu panasiai centruotas menu | hack: to always be similarly; centered 
+    // pirma atspausdinu tusciu liniju | print a blank line first
     myclear();
     text();
     for (;;)
@@ -90,7 +91,7 @@ void text()
     printf("Menu \r\n\n");
     printf(" x - Exit\r\n");
 
-    // clear screen nelabai cia reikalingas...
+    // clear screen nelabai cia reikalingas... | clear screen not really needed here ...
     printf(" с - Clear Screen\r\n\n");
     printf(" f - Integrate f(x) = x \r\n");
     printf(" s - Integrate f(x) = x^2\r\n\n");
@@ -104,9 +105,9 @@ void spresk(double (*funk) (double x))
     double a,b,f;
     int n;
 
-    // Duomenys -------------------------------
+    // Duomenys | Data -------------------------------
     printf("a = ");
-    // a, b, n jau deklaruoti, scanf reikia zinoti tik jo adresa
+    // a, b, n jau deklaruoti, scanf reikia zinoti tik jo adresa | a, b, n have already been declared, scanf only needs to know its address
     scanf("%lf", &a);
 
     printf("b = ");
@@ -115,16 +116,16 @@ void spresk(double (*funk) (double x))
     printf("n = ");
     scanf("%d", &n);
 
-    // isvalo nuo susikaupusio "return" zenklo stinput
+    // isvalo nuo susikaupusio "return" zenklo stinput | clears from the accumulated "return" sign stinput
     while (getchar() != '\n');
 
     // ----------------------------------------
 
     f = simpson(funk,a,b,n); // Integralas
 
-    // Rezultatas -----------------------------
+    // Rezultatas | Result-----------------------------
 
-    printf("Integralas = %.3lf\n",f);
+    printf("Integral = %.3lf\n",f);
 
 }
 
