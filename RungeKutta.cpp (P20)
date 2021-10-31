@@ -1,7 +1,7 @@
 //
-//  RungeKutta.cpp
+// RungeKutta.cpp
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
 // Updated by Aurimas Nausedas on 10/29/21.
 
 #include "RungeKutta.hpp"
@@ -22,39 +22,39 @@ RungeKutta::RungeKutta(double lt, double lh, int ln)
     f = new double[n];
     ft = new double[n];
 
-    // patikrinu, kad masyvas sekmingai alokuotas
-    // turi pasikeisti adresas
-    if (x == 0)
+    // patikrinu, kad masyvas sekmingai alokuotas | check that the array has been successfully allocated
+    // turi pasikeisti adresas | the address must change
+    if (x == 0) 
     {
-        printf("Nepavyko alokuoti x masyvo\n");
+        printf("Failed to allocate x array\n");
         exit(1);
     }
 
     if (xt == 0)
     {
-        printf("Nepavyko alokuoti xt masyvo\n");
+        printf("Failed to allocate xt array\n");
         exit(1);
     }
 
     if (f == 0)
     {
-        printf("Nepavyko alokuoti f masyvo\n");
+        printf("Failed to allocate t array\n");
         exit(1);
     }
 
     if (ft == 0)
     {
-        printf("Nepavyko alokuoti ft masyvo\n");
+        printf("Failed to allocate ft array\n");
         exit(1);
     }
 
-    // eilute apacioje nereikalingos ivedus operatoriu
-    // surasau i x masyva pateiktas pradines x vertes
-    //for (int i = 0; i < n; i++) {x[i] = lx[i];};
+    // eilute apacioje nereikalingos ivedus operatoriu | line at the bottom is unnecessary after entering the operator
+    // surasau i x masyva pateiktas pradines x vertes | I found the initial x values in the x array
+    //for (int i = 0; i < n; i++) {x[i] = lx[i];}; | for (int i = 0; i <n; i ++) {x [i] = lx [i];};
 
 }
 
-// destruktorius
+// destruktorius | destructor
 RungeKutta:: ~RungeKutta()
 {
     delete []x;
@@ -63,25 +63,25 @@ RungeKutta:: ~RungeKutta()
     delete []ft;
 }
 
-// step funkcija
+// step funkcija/function
 void RungeKutta::step()
 {
-    // atnaujinu f masyve saugomas vertes
+    // atnaujinu f masyve saugomas vertes | update the values stored in the f array
     fk(x,f);
 
-    // paskaiciuoju a_tilde
+    // paskaiciuoju a_tilde | read a_tilde
     for (int i = 0; i < n; i++)
     {
         xt[i] = x[i] + h * f[i];
     }
 
-    // paskaiciuju t sekanciame taske
-    t += h;
+    // paskaiciuju t sekanciame taske | count t at the next point
+    t += h; 
 
-    // paskaiciuoju fk vertems naujuose taskuose
+    // paskaiciuoju fk vertems naujuose taskuose | calculate fk values in the new points
     fk(xt,ft);
 
-    // perrasau vertes adresais a and t
+    // perrasau vertes adresais a and t | rewrite values at addresses a and t
     for (int i = 0; i < n; i++)
     {
         x[i] = x[i] + (h / 2) * (f[i] + ft[i]);
