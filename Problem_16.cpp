@@ -1,7 +1,8 @@
 //
 // Problem_16.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <conio.h>
@@ -9,7 +10,7 @@
 #include <iostream.h>
 #include <stdlib.h>
 
-// Klasiu deklaracija -----------------------------------------------
+// Klasiu deklaracija | Declaration of classes -----------------------------------------------
 
 class Window
 {
@@ -37,9 +38,9 @@ public:
 }
 
 
-// Klasiu funkcijos ------------------------------------------------
+// Klasiu funkcijos | Functions of classes ------------------------------------------------
 
-// konstruktorius klases Window
+// konstruktorius klases Window | constructor Window
 Window::Window(int lxp, int lyp, int lxd, int lyd, int lsf)
 {
   xp = lxp;
@@ -52,7 +53,7 @@ Window::Window(int lxp, int lyp, int lxd, int lyd, int lsf)
   yg = yd + yp - 1;
 };
 
-// konstruktorius klases Frame
+// konstruktorius klases Frame | constructor Frame
 Frame::Frame(int lxp, int lyp, int vxd, int vyd, int lsf) :
 Window(lxp, lyp, vxd+2, vyd+2,lsf)
 {
@@ -61,41 +62,41 @@ Window(lxp, lyp, vxd+2, vyd+2,lsf)
 // ----------------------------------------------------------------
 
 
-// lango aktyvavimas
+// lango aktyvavimas | window activation
 void Window::act()
 {
-  window(xp,yp,xg + 1,yg); // langa darau viena eilute platesni is desines
-                           // kitaip neiseina isvengti eiluciu sokinejimo
+  window(xp,yp,xg + 1,yg); // langa darau viena eilute platesni is desines | I make the window one line wider than the right
+                           // kitaip neiseina isvengti eiluciu sokinejimo | otherwise you can't avoid duplicating lines
   textcolor(15);
   textbackground(sf);
 };
 
 
-// frame lango aktyvavimas...
+// frame lango aktyvavimas... | frame window activation
 
 
 // ----------------------------------------------------------------
-// lango rodymas
+// lango rodymas | show of a window
 void Window::on()
 {
 
-  // lango informacijos uzrasymas i buferi
-  int size = 2 * (xd + 1) * yd; // buferio dydis
-  buf = new char[size]; // alokuoju masyva
-  if (buf == 0) // pirmo elemonto adresas priskiriamas rodyklei buf
+  // lango informacijos uzrasymas i buferi | writing window information to the buffer
+  int size = 2 * (xd + 1) * yd; // buferio dydis | buffer size
+  buf = new char[size]; // alokuoju masyva | allocating array
+  if (buf == 0) // pirmo elemonto adresas priskiriamas rodyklei buf | the address of the first item is assigned to the buf arrow
   {
-    printf("Klaida, nealokuota atmintis buferio dinaminiam masyvui\n");
+    printf("Error allocating memory for buffer dynamic array\n");
     exit(1);
   }
   gettext(xp, yp, xg + 1, yg, buf);
 
-  // papildomai buvusio lango info saugoti
+  // papildomai buvusio lango info saugoti | additional former window info storage
   gettextinfo(&txinf);
 
-  // activuoju langa
+  // aktivuoju langa | window activation
   act();
 
-  // Naujo lango piesimas
+  // Naujo lango piesimas | drawing a new window
   int y = 1;
   for (y; y<=yd; y++)
   {
@@ -111,10 +112,10 @@ void Window::on()
 };
 
 // ----------------------------------------------------------------
-// frame lango rodymas
+// frame lango rodymas | showing frame window
 void Frame::on()
 {
-  // nupiesiamas langas (per 2 didesnis nei 'uzsakyta')
+  // nupiesiamas langas (per 2 didesnis nei 'uzsakyta') | clickable window (2 times larger than 'ordered')
   Window::on();
 
   //printf("xp,yp,xg,yg are %d,%d,%d,%d",xp,yp,xg,yg);
@@ -130,39 +131,39 @@ void Frame::on()
     for (x; x<=xd; x++)
     {
       gotoxy(x, y);
-      // jei kampas:
+      // jei kampas: | if window:
       if ((y == 1) && (x == 1))
       {
         cprintf("%c",201);
       }
 
-      // jei kampas:
+      // jei kampas: | if window:
       else if ((y == 1) && (x == xd))
       {
         cprintf("%c",187);
       }
 
-      // jei kampas:
+      // jei kampas: | if window:
       else if ((y == yd) && (x == 1))
       {
         cprintf("%c",200);
       }
 
-      // jei kampas:
+      // jei kampas: | if window:
       else if ((y == yd) && (x == xd))
       {
         //gotoxy(x, y);
         cprintf("%c",188);
       }
 
-      //jei virsus arba apacia
+      //jei virsus arba apacia | If over or under
       else if ((y == 1) || (y == yd))
       {
         //gotoxy(x, y);
         cprintf("%c",205);
       }
 
-      //jei kaire arba desine
+      //jei kaire arba desine | If left or right
       else if ((x == 1) || (x == xd))
       {
         //gotoxy(x, y);
@@ -187,23 +188,23 @@ void Frame::on()
 void Window::off()
 {
   puttext(xp, yp, xg + 1, yg, buf);
-  delete []buf; // isvalau dinamiskai alokuota atminties gabala
+  delete []buf; // isvalau dinamiskai alokuota atminties gabala | remove a dynamically allocated piece of memory
 
-  // graziname buvusio lango atributus, kursoriaus lokacija
+  // graziname buvusio lango atributus, kursoriaus lokacija | return the attributes of the previous window, the cursor position
   window(txinf.winleft, txinf.wintop, txinf.winright, txinf. winbottom);
   textattr(txinf.attribute);
   gotoxy(txinf.curx,txinf.cury);
 };
 
 
-// Main programa --------------------------------------------------
+// Main program --------------------------------------------------
 
 
 int main()
 {
-  // paleidziant emuliatoriu ir turbo C
-  // paleidziama programa, kuri spausdina "turbo C"
-  // ekrane, reikia isvalyti
+  // paleidziant emuliatoriu ir turbo C | launching the emulator and turbo C
+  // paleidziama programa, kuri spausdina "turbo C" | launches a program that prints turbo C
+  // ekrane, reikia isvalyti | screen, needs to be cleared
   clrscr();
 
   Window A(25, 7, 10, 5, 14);
@@ -213,12 +214,12 @@ int main()
   // nestandartine conio.h funkcija, tik edukacijai
   gotoxy(12,10);
 
-  // tikriausiai irgi nestandartine conio.h funkcija, tik edukacijai
+  // tikriausiai irgi nestandartine conio.h funkcija, tik edukacijai | non-standard conio.h function, for education only
   cprintf("Some Text on the Black Screen");
   getch();
 
   // ---------------------------------------------------------------
-  A.on();		// Pirmas langas
+  A.on();		// Pirmas langas | First window
   gotoxy(3, 2);
   textcolor(11);
   cprintf("First");
@@ -230,7 +231,7 @@ int main()
 
 
   // ---------------------------------------------------------------
-  B.on();		// Antras langas
+  B.on();		// Antras langas | Second window
   textcolor(0);
   gotoxy(6, 3);
   cprintf("One more");
