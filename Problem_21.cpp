@@ -1,7 +1,8 @@
 //
 // Problem_21.cpp
 //
-//  Created by Aurimas Nausedas on 10/09/19.// vectors
+// Created by Aurimas Nausedas on 10/09/19. 
+// Update by Aurimas Nausedas onn 10/31/21.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,7 +17,7 @@ class Vector
 {
 public:
     Vector(){n = 0; x = 0;};
-    Vector(int n){alokacija(n);};
+    Vector(int n){alokacija(n);}; | alokacija = allocation
     Vector(char* failas);
     Vector(Vector& A);
 
@@ -36,8 +37,8 @@ public:
     //friend Matrix Matrix(Vector& A);
 
 private:
-    int n; //Komponenciu skaicius
-    double *x; // Rodykle i komponenciu masyva
+    int n; // Komponenciu skaicius | Number of components
+    double *x; // Rodykle i komponenciu masyva | Arrow to an array of components
 };
 
 //-----------------------------------------------
@@ -48,7 +49,7 @@ void Vector::alokacija(int ln)
     x = new double[n];
     assert(x != 0);
     clear();
-    //printf("Alokuojam: %p\n" , x);
+    //printf("Allocating: %p\n" , x);
 }
 
 //-----------------------------------------------
@@ -60,11 +61,11 @@ void Vector::clear()
 //-----------------------------------------------
 Vector::Vector(char* failas)
 {
-    FILE* in; //rodykle i struktura FILE
-              //FILE reikalinga buferiui valdyti
+    FILE* in; // rodykle i struktura FILE | arrow in FILE structure
+              // FILE reikalinga buferiui valdyti | FILE is required to control the buffer
     int n;
     double dl;
-    //printf("FAILAS: %s",failas);
+    //printf("FILE: %s",failas);
     in = fopen(failas,"rt");
     assert(in != 0);
 
@@ -91,7 +92,7 @@ Vector::Vector(Vector& A)
 
 Vector::~Vector()
 {
-    //printf ("Naikiname: %p\n",x);
+    //printf ("Deleting: %p\n",x);
     if(x != NULL) delete []x;
 }
 
@@ -122,10 +123,10 @@ void Vector::naujas(int ln)
     if (n == ln) return;
     if (x != 0) delete []x;
 
-    // ar cia kartais neturi buti ln? Knygoje: alokacija(n)
-    // mano supratimu turi buti ln
-    // visa ideja yra peralokuoti toko dydzio vector objekto
-    // x masyva, kad graziai tilptu rezultatas
+    // ar cia kartais neturi buti ln? Knygoje: alokacija(n) | don't you have to be here sometimes? In the book: allocation (n)
+    // mano supratimu turi buti ln | In my understanding must be ln
+    // visa ideja yra peralokuoti toko dydzio vector objekto | the whole idea is to reallocate a vector object of that size
+    // x masyva, kad graziai tilptu rezultatas | x array to fit nicely the result
     alokacija(ln);
 }
 
@@ -135,7 +136,7 @@ Vector operator+ (Vector& A, Vector& B)
 {
     if (A.n != B.n)
     {
-        printf("Klaida vektoriaus klaseje: blogas indeksas\n");
+        printf("Vector class error: bad index\n");
         exit(1);
     }
     Vector Temp(A.n);
@@ -153,7 +154,7 @@ Vector operator *(Vector& A, Vector& B)
 {
 	if (A.n != B.n)
     {
-        printf("Klaida vektoriaus klaseje: blogas indeksas\n");
+        printf("Vector class error: bad index\n");
         exit(1);
     }
     Vector Temp(1);
@@ -168,7 +169,7 @@ double& Vector::operator[] (int i)
 {
     if (i < 0 || i >= n)
     {
-        printf("Vektoriaus indekso klaida!\n");
+        printf("Vector index error!\n");
         exit(1);
     }
     return x[i];
@@ -205,7 +206,7 @@ public:
     void operator= (const Matrix& A);
     double& iloc(int i,int j);
     void naujas(int ln, int lm);
-    void T(); //transpozicijai
+    void T(); // transpozicijai | transposition
 
 
     friend Matrix operator +(const Matrix& A, const Matrix& B);
@@ -216,7 +217,7 @@ private:
     int 	n, //eiluciu sk
     		m; //stulpeliu sk
 
-    double **x; // Rodykle i komponenciu masyva
+    double **x; // Rodykle i komponenciu masyva | Arrow to an array of components
 };
 
 
@@ -237,7 +238,7 @@ void Matrix::alokacija(int ln, int lm)
 
 
     clear();
-    //printf("Alokuojam: %p\n" , x);
+    //printf("Allocating: %p\n" , x);
 }
 
 //-----------------------------------------------
@@ -254,11 +255,11 @@ void Matrix::clear()
 //-----------------------------------------------
 Matrix::Matrix(char* failas)
 {
-    FILE* in; //rodykle i struktura FILE
-              //FILE reikalinga buferiui valdyti
+    FILE* in; // rodykle i struktura FILE | arrow in the FILE structure
+              // FILE reikalinga buferiui valdyti | FILE is required to control the buffer
     int n,m;
     double dl;
-    printf("\nFAILAS: %s\n\n",failas);
+    printf("\nFILE: %s\n\n",failas);
     in = fopen(failas,"rt");
     assert(in != 0);
 
@@ -284,7 +285,7 @@ Matrix::Matrix(const Matrix& A)
 {
     //printf("--------------------------------------\n");
     alokacija(A.n,A.m);
-    //printf("konstruojamo n = %d, m = %d\n",n,m);
+    //printf("consrtucting n = %d, m = %d\n",n,m);
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -301,7 +302,7 @@ Matrix::Matrix(const Matrix& A)
 
 //-----------------------------------------------
 /*
-// konstruktorius paversti vektoriu stulpeliu (matrica)
+// konstruktorius paversti vektoriu stulpeliu (matrica) | convert constructor to vector column (matrix)
 Matrix::Matrix(Vector& A)
 {
     alokacija(A.n,1);
@@ -314,7 +315,7 @@ Matrix::Matrix(Vector& A)
 
 Matrix::~Matrix()
 {
-    //printf ("Naikiname: %p\n",x);
+    //printf ("Deleting: %p\n",x);
     if(x != NULL)
     {
         for (int i = 0; i < n; i++) delete []x[i];
@@ -324,7 +325,7 @@ Matrix::~Matrix()
 }
 
 //-----------------------------------------------
-void Matrix::out(char* s) // veikia
+void Matrix::out(char* s) // veikia | works
 {
     printf("%s:\n", s);
     if(x == 0)
@@ -371,7 +372,7 @@ Matrix operator+ (const Matrix& A, const Matrix& B)
 {
     if (A.n != B.n || A.m != B.m)
     {
-        printf("Klaida, negalima sudeti matricu %dx%d ir %dx%d\n",A.n,A.m,B.n,B.m);
+        printf("Error, cannot add matrix %dx%d and %dx%d\n",A.n,A.m,B.n,B.m);
         Matrix Temp;
         return Temp;
     }
@@ -388,7 +389,7 @@ Matrix operator+ (const Matrix& A, const Matrix& B)
 
 //-----------------------------------------------
 
-//transpozicija
+// transpozicija | transposition
 void Matrix::T()
 {
     if (x == 0)
@@ -403,12 +404,12 @@ void Matrix::T()
         for (int j = 0; j < m; j++) Temp.x[j][i] = x[i][j];
     }
 
-    //isvalau x:
-    //printf ("Naikiname: %p\n",x);
+    //isvalau x: | Deleting x:
+    //printf ("Deleting: %p\n",x);
     for (i = 0; i < n; i++) delete []x[i];
     delete []x;
 
-    // sukonstruoju nauja x:
+    // sukonstruoju nauja x: | Constructing new x:
     //Matrix(Temp) // gal veiks?
     alokacija(Temp.n,Temp.m);
     for (i = 0; i < n; i++)
@@ -416,18 +417,18 @@ void Matrix::T()
         for (int j = 0; j < m; j++) x[i][j] = Temp.x[i][j];
     }
 
-    //temp turi susinaukinti uz skliausto
+    //temp turi susinaukinti uz skliausto | temp must delete itself after the parentheses
 
 }
 
 //-----------------------------------------------
 
-// matricu sandauga
+// matricu sandauga | matrix multiplication
 Matrix operator *(const Matrix& A, const Matrix& B)
 {
     if (A.m != B.n)
-    {
-        printf("Klaida, negalima sudauginti matricu %dx%d ir %dx%d\n",A.n,A.m,B.n,B.m);
+   y
+        printf("Error, cannot multiplby matrixes %dx%d ir %dx%d\n",A.n,A.m,B.n,B.m);
         Matrix Temp;
         return Temp;
     }
@@ -446,24 +447,24 @@ Matrix operator *(const Matrix& A, const Matrix& B)
     return Temp;
 }
 
-// matricos ir vektoriaus sandauga
+// matricos ir vektoriaus sandauga | product of matrix and vector
 Matrix operator *(const Matrix& M, const Vector& V)
 {
-    // 1 zingsnis: pasidaryti matrica is vectoriaus V
+    // 1 zingsnis: pasidaryti matrica is vectoriaus V | Step 1: Make a matrix from the vector V
     if (M.m != V.n)
     {
-        printf("Klaida, negalima sudauginti M ir V su dimensijomis %dx%d ir %d\n",M.n,M.m,V.n);
+        printf("Error, M and V cannot be multiplied by dimensions %dx%d and %d\n",M.n,M.m,V.n);
         Matrix Temp;
         return Temp;
     }
 
-    Matrix VM(V.n,1); // stulpelis
+    Matrix VM(V.n,1); // stulpelis | column
     for (int i = 0; i < V.n; i++)
     {
         VM.x[i][1] = V.x[i];
     }
 
-    // antras zingsnis = tiesiog panadoju matricu sandauga
+    // antras zingsnis = tiesiog panadoju matricu sandauga | step two = just multiply the matrix
     Matrix Temp;
     Temp = M * VM;
     return Temp;
@@ -477,7 +478,7 @@ double& Matrix::iloc(int i,int j)
 {
     if (i < 0 || i >= n || j < 0 || j >= m)
     {
-        printf("Vektoriaus indekso klaida!\n");
+        printf("Vector index error!\n");
         exit(1);
     }
     return x[i][j];
@@ -520,7 +521,7 @@ int main()
     getch();
     clrscr();
 
-    //matricos
+    //matricos | matrices
     Matrix  X("c:\\TC\\BIN\\p21_dat\\m_x.dat"),
             Xrep("c:\\TC\\BIN\\p21_dat\\m_x.dat"),
             Y("c:\\TC\\BIN\\p21_dat\\m_y.dat");
@@ -529,7 +530,7 @@ int main()
     getch();
     clrscr();
 
-    //transpozicija
+    //transpozicija | transposition
     printf("Transpozicija\n\n");
     Xrep.out("X");
     Xrep.T();
@@ -538,8 +539,8 @@ int main()
     getch();
     clrscr();
 
-    // sandauga matricu
-    printf("Matricu sandauga 1\n\n");
+    // sandauga matricu | matrices multiplication
+    printf("Matrices multiplication 1\n\n");
     X.out("X");
     Y.out("Y");
     Matrix Z,W;
@@ -548,7 +549,7 @@ int main()
     getch();
     clrscr();
 
-    printf("Matricu sandauga 2\n\n");
+    printf("Matrices multiplication 2\n\n");
     X.out("X");
     Y.out("Y");
     Z = X * Y;
@@ -557,7 +558,7 @@ int main()
     clrscr();
 
     // suma matricu:
-    printf("Matric suma 1\n\n");
+    printf("Matrices sum 1\n\n");
     X.out("X");
     Y.out("Y");
     Matrix Sf;
@@ -566,7 +567,7 @@ int main()
     getch();
     clrscr();
 
-    printf("Matric suma 2\n\n");
+    printf("Matrices sum 2\n\n");
     X.out("X");
     Xrep.out("Xrep");
     Matrix S;
@@ -575,8 +576,8 @@ int main()
     getch();
     clrscr();
 
-    //Matricos ir vectoriaus sandaugan1
-    printf("Matricos ir vektoriaus sandauga 1\n\n");
+    //Matricos ir vectoriaus sandauga | Multiplication of matrix and vector
+    printf("Multiplication of matrix and vector 1\n\n");
     A.out("A");
     X.out("X");
     Matrix MVf;
@@ -585,7 +586,7 @@ int main()
     getch();
     clrscr();
 
-    printf("Matricos ir vektoriaus sandauga 2\n\n");
+    printf("Multiplication of matrix and vector 2\n\n");
     X.T();
     A.out("A");
     X.out("Xt");
