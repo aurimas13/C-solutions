@@ -1,7 +1,9 @@
 //
 // Problem_18.cpp
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas 10/31/21.
+
 #include <stdio.h>
 #include <conio.h>
 #include <math.h>
@@ -17,8 +19,8 @@ double fk(double x,double n);
 int main()
 {
 
-    // ivairiaspalves 1/(x/n) funkcijos, kur n = 1,...,5
-    int sk = 500; //zingsniu sk
+    // ivairiaspalves 1/(x/n) funkcijos, kur n = 1,...,5 | multicolored 1 / (x / n) functions, where n = 1, ..., 5
+    int sk = 500; //zingsniu sk| number of steps
     double  Xmin = 0,
     Xmax = 10,
     Xdel = 1;
@@ -26,17 +28,18 @@ int main()
     Ymax = 10,
     Ydel = 1;
 
-    char leg[20]; // pavadinimams
+    char leg[20]; // pavadinimas | name 
 
     double x,f;
-    double h = (Xmax - Xmin) / sk; // Zingsnis
+    double h = (Xmax - Xmin) / sk; // Zingsnis | Step
 
     init();
 
-    Plot T(0,0,getmaxx(),getmaxy(), // Lango matmenys
-           Xmin, Xmax, Xdel,        // X asis
-           Ymin, Ymax, Ydel,        // Y asis
-           15, 13);                 // Fonas ir tinklelis
+    Plot T(0,0,getmaxx(),getmaxy(), // Lango matmenys | Window size
+           Xmin, Xmax, Xdel,        // X asis | X axis
+           Ymin, Ymax, Ydel,        // Y asis | Y axis
+           15, 13);                 // Fonas ir tinklelis | Background and grid
+
 
     T.on();
     getch();
