@@ -1,7 +1,8 @@
 //
 // Problem_23.cpp
 //
-//  Created by Aurimas Nausedas on 10/20/19.
+// Created by Aurimas Nausedas on 10/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <iostream>
 #include <iomanip>
@@ -13,15 +14,15 @@ namespace myform
     int w = 10;
 }
 
-// 15 pratimas perdarytas
-// apie stream classes etc: http://www.cplusplus.com/reference/ios/
+// 15 pratimas perdarytas | Exercise 15 re-done
+// apie stream classes etc: http://www.cplusplus.com/reference/ios/ | about stream classes etc: http://www.cplusplus.com/reference/ios/
 
 
-// Deklaracija -------------------------
+// Deklaracija |. Declaration -------------------------
 class Vector
 {
 public:
-    // default konstruktorius (inline)
+    // default konstruktorius (inline) | default constructor
     Vector(){};
     Vector(double x, double y, double z);
     friend Vector operator+(const Vector& A, const Vector& B);
@@ -33,8 +34,8 @@ private:
     double xv,yv,zv;
 };
 
-// Funkcijos ----------------------------
-// konstruktorius
+// Funkcijos | Functions ----------------------------
+// konstruktorius | constructor
 Vector::Vector(double x, double y, double z)
 {
     xv = x;
@@ -44,7 +45,7 @@ Vector::Vector(double x, double y, double z)
 
 
 
-// vektoriu suma
+// vektoriu suma | sum of vedctors
 Vector operator+(const Vector& A, const Vector& B)
 {
     return Vector(A.xv + B.xv,A.yv + B.yv,A.zv + B.zv);
@@ -52,7 +53,7 @@ Vector operator+(const Vector& A, const Vector& B)
 
 
 
-// vektoriu skaliarine sandauga
+// vektoriu skaliarine sandauga | vector scalar product
 double operator*(const Vector& A, const Vector& B)
 {
     double mult = A.xv * B.xv + A.yv * B.yv + A.zv * B.zv;
@@ -60,7 +61,7 @@ double operator*(const Vector& A, const Vector& B)
 };
 
 
-// vektoriu vector sandauga
+// vektoriu sandauga | vector multiplication
 Vector operator^(const Vector& A, const Vector& B)
 {
 
@@ -73,15 +74,15 @@ Vector operator^(const Vector& A, const Vector& B)
 
 
 
-// show funkcija
+// show funkcija | show function
 void Vector::show(string s)
 {
     long sl = s.length();
 
-    // kad lygiavimas butu grazus, pirma tarp darysiu mazesni arba didesni:
+    // kad lygiavimas butu grazus, pirma tarp darysiu mazesni arba didesni: | to make the alignment nice, first of all I will make it smaller or bigger:
     int pt = 2 * myform::w;
 
-    if (sl > pt) pt = myform::w; // jei labai ilgas uzrasas, nieko nedarau
+    if (sl > pt) pt = myform::w; // jei labai ilgas uzrasas, nieko nedarau | if the caption is very long, I don't do anything
     else pt -= sl;
 
     cout << s << ':';
@@ -93,7 +94,7 @@ void Vector::show(string s)
 int main()
 {
     Vector A(1.00, 2.01, 3), B(-4, 2, 1), C;
-    cout << "*** Vectoriai 3D*** \n";
+    cout << "*** Vectors 3D*** \n";
     A.show("A");
     B.show("B");
     printf("\n");
@@ -105,6 +106,7 @@ int main()
     cout << '\n';
 
     //string z = "1234";
-    //cout << "1234 dydis yra" << z.length();
+    //cout << "1234 dydis yra" << z.length(); | cout << "1234 size is" << z.length();
+
     return 0;
 }
