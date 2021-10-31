@@ -4,29 +4,30 @@
 // Problem_22
 //
 // Created by Aurimas Nausedas on 10/15/19.
+// Updated by Aurimas Nausecxdas 10/31/21.
 
 #include <iostream>
-#include <iomanip> // kad galeciau kontroliuoti formatavima
-using namespace std;
+#include <iomanip> // kad galeciau kontroliuoti formatavima | so I can control formatting
+using namespace std; 
 
 
 int main()
 {
-    // atspausdinu lentele pavadima,
-    // kiek supratau centruoti teksta su C elegantiskai neiseina
-    cout << "\t\t  *** Daugybos lentele ***\n\n";
+    // atspausdinu lentele pavadima | name of the printing table
+    // kiek supratau centruoti teksta su C elegantiskai neiseina | as far as I understood centering the text with C doesn't go elegantly
+    cout << "\t\t  *** Multiplication table ***\n\n";
 
-    // pradedu eiluciu cikla
+    // pradedu eiluciu cikla | beginning a row cycle
     for (int i = 1; i < 11; i++)
     {
-        // pradedu stulpeliu cikla
+        // pradedu stulpeliu cikla | beginning a column cycle
         for (int j = 1; j < 11; j++)
         {
-            // paskaiciuoju sandauga (product)
+            // paskaiciuoju sandauga (product) | multiplication of rows and columns
             int p = i * j;
 
-            // atpazistu pirma stulpeli: sandauga sutampa su
-            // stulpelio numeriu
+            // atpazistu pirma stulpeli: sandauga sutampa su | recognize the first column: the product of
+            // stulpelio numeriu |  column number
 
             cout << setw( 4 ) << p;
             if (p == i) cout <<"|";
