@@ -1,7 +1,8 @@
 //
 // Problem_10.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,13 +18,13 @@ int main()
     long n = 0;
     int i,j;
 
-    char d;     // Puodo vardas
-    long x = 0, // Pirmas puodas
-         y = 0, // Antras puodas
-         z = 0; // Trecias puodas
+    char d;     // Puodo vardas | The name of the pot
+    long x = 0, // Pirmas puodas | First pot
+         y = 0, // Antras puodas | Second pot
+         z = 0; // Trecias puodas | Third pot
 
-    printf("Monte Karlo atsitiktinis procesas - 3 puodai \n\n");
-    printf("Tikslus resultatas: X = 3, Y = 2, Z = 1\n\n");
+    printf("Monte Carlo random process - 3 pots \n\n");
+    printf("Exact resutl: X = 3, Y = 2, Z = 1\n\n");
     printf("    Iter.     X       Y       Z\n\n");
 
     for (j = 0; j < 21; j++)
@@ -54,12 +55,12 @@ int main()
 char generation()
 {
     double r = rnd();
-    if (r < 2. / 9) // x generacijos tikimybe
+    if (r < 2. / 9) // x generacijos tikimybe | x generation probability
     {
         return 'x';
     }
 
-    else if (r < (2. / 9) + (1. / 9)) // y generacijos tikimybe 1/9
+    else if (r < (2. / 9) + (1. / 9)) // y generacijos tikimybe 1/9 | x generation probability 1/9
     {
         return 'y';
     }
@@ -79,7 +80,7 @@ void wandering(char d, long& x, long& y, long& z)
     for(;;)
     {
         r = rnd();
-        switch(d)                   // Puodas X
+        switch(d)                   // Puodas X | Pot X
         {
             // ******************************************
             case 'x':
@@ -90,18 +91,18 @@ void wandering(char d, long& x, long& y, long& z)
                 }
 
                                         // P(X -> Z) = 0
-                                        // t.y. niekad taip nebus
+                                        // t.y. niekad taip nebus | that is it will never happen
 
 
-                else if (r < (1. / 9) + (1. / 9))  // P(Zutis) = 1/9
+                else if (r < (1. / 9) + (1. / 9))  // P(Death) = 1/9
                 {
                     return;
                 }
-                break;              // P( lieka X puode) = 7/9
+                break;              // P(Stays in X pot) = 7/9
 
 
             // ******************************************
-            case 'y':               // Puodas Y
+            case 'y':               // Puodas Y | Pot Y
                 y++;
                 if (r < 2. / 9)       // P (Y -> X) = 2/9
                 {
@@ -113,15 +114,15 @@ void wandering(char d, long& x, long& y, long& z)
                     d = 'z';
                 }
 
-                else if (r < (2. / 9) + (1. / 9) + (1. / 9))   // P(Zutis) = 1/9
+                else if (r < (2. / 9) + (1. / 9) + (1. / 9))   // P(Death) = 1/9
                 {
                     return;
                 }
                 break;
-                            // P( lieka Y puode) = 5/9
+                            // P(Stays in Y pot) = 5/9
 
             // ******************************************
-            case 'z':               // Puodas Z
+            case 'z':               // Puodas Z | Pot Z
                 z++;
                                     // P (Z -> X) = 0
                 if (r < 4. / 9)      // P (Z -> Y) = 0
@@ -129,12 +130,12 @@ void wandering(char d, long& x, long& y, long& z)
                     d = 'y';
                 }
 
-                else if (r < (4. / 9) + (4. / 9))   // P (Zutis) = 4 / 9
+                else if (r < (4. / 9) + (4. / 9))   // P (Death) = 4 / 9
                 {
                     return;
                 }
 
-                // P (Lieka Z puode) = 1/9
+                // P (Stays in Z pot) = 1/9
         }
     }
 }
