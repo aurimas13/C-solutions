@@ -1,3 +1,8 @@
+// Problem_1.cpp
+//
+// Created by Aurimas Nausedas on 9/17/19.
+// Updated by Aurimas Nausedas on 10/31/21.
+
 #include <iostream>
 #include <ncurses.h>
 #include <curses.h>
@@ -40,8 +45,8 @@ int main()
         }
         cout << endl;
       }
-    //for(i=1; i<=10; i++)  { // pirmas for loop'as, row
-      //  for (j=1; j<=10; j++) { // antras for loop'as, column
+    //for(i=1; i<=10; i++)  { // pirmas for loop'as, row | first row for loop
+      //  for (j=1; j<=10; j++) { // antras for loop'as, column | second column for loop
         //cout << j*i << "\t";
         //}
     //cout << endl;
