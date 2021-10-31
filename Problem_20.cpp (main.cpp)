@@ -1,9 +1,10 @@
 //
-//  main.cpp
+// main.cpp
 //
 // Problem_20
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 
@@ -13,22 +14,22 @@
 
 int main()
 {
-    // laikas ir zingsnis
+    // laikas ir zingsnis | time and step
     double t = 0, h = 0.1;
 
-    //masyvai
+    //masyvai | arrays
     const int n = 2; // masyvo ilgis
 
-    // deklaruoju objekta
+    // deklaruoju objekta | declaring object
     MyRungeKutta X(t,h,n);
 
-    // surasau pradines vertes i masyva x
+    // surasau pradines vertes i masyva x | found the initial values ​​in the array x
     X[0] = 1;
     X[1] = 0;
     X.set(1);
 
 
-    printf(" *** Runges ir Kutos Metodas: Masyvai ***\n\n");
+    printf(" *** Runga and Kuta Method: Arrays ***\n\n");
     printf("   dx[0]/dt = -x[1], dx[1]/dt = x[0]\n\n");
     printf("      t = 0: x[0] = 1, x[1] = 0\n\n");
     printf("t      x[0]      cos(t)    x[1]      sin(t)\n");
