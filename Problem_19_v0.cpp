@@ -1,7 +1,8 @@
 //
-// Problem_19_v0.cpp
+// Problem_19_v3.cpp
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <conio.h>
@@ -9,10 +10,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-
-
-// deklaruoju klases
-// pagrindine
+// deklaruoju klases | declaring classes
+// pagrindine | main
 class Figure
 {
 public:
@@ -22,11 +21,11 @@ public:
     virtual void hide() = 0;
 protected:
     int x,y,c;
-    // spalva
+    // spalva | colour
 };
 
 // ------------------------------------------------------
-// isvestines klases
+// isvestines klases | derived classes
 
 class Circle : public Figure
 {
@@ -65,7 +64,7 @@ public:
 
 //******************************************************
 
-// deklaruoju pagalbines funkcijas
+// deklaruoju pagalbines funkcijas | declaring helper functions
 void init();
 void generation(Figure **f, int number);
 
@@ -75,15 +74,15 @@ int main()
 {
     const int number = 21;
     double t;
-    int randcol; // atsitiktine spalva
+    int randcol; // atsitiktine spalva | arbitrary colour
 
-    // alokuoju rodykle is Figure klases objekta
+    // alokuoju rodykle is Figure klases objekta | allocate an arrow from the Figure class object
     Figure *f[number];
 
-    // inicializuoja grafini langa
+    // inicializuoja grafini langa | initializes the graphical window
     init();
 
-    // uzpildau masyva isvestiniai Figure objektais
+    // uzpildau masyva isvestiniai Figure objektais | fill an array of derived Figure objects
     generation(f, number);
 
     for(int i = 0; i < number; i++)
@@ -101,7 +100,7 @@ int main()
             f[i] -> move(-50 * sin(0.5 * i - t) + 240);
 
         }
-    } while (!kbhit()); // kol nenuspaude mygtuko
+    } while (!kbhit()); // kol nenuspaude mygtuko | until you press the button
     getch();
 
     closegraph();
@@ -112,7 +111,7 @@ int main()
 }
 
 //******************************************************
-// klases funkciju apibrezimai
+// klases funkciju apibrezimai | definitions of class functions
 
 void Figure::move(int ly)
 {
@@ -127,8 +126,8 @@ void Circle::show(int lc) // spalva, nuo 0 iki 16, 0 = juoda.
 {
     setcolor(lc);
     circle(x, y, 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
-}
+    c = lc; // perrasau spalva kad galeciau naudoti su move | I rewrote the colour so I could use it with the move
+} 
 
 void Circle::hide()
 {
@@ -141,7 +140,7 @@ void Square::show(int lc)
 {
     setcolor(lc);
     rectangle(x - 10, y - 10, x + 10, y + 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | I rewrote the colour so I could use it with the move
 }
 
 void Square::hide()
@@ -157,7 +156,7 @@ void Triangle::show(int lc)
     lineto(x, y - 10);
     lineto(x + 10, y + 10);
     lineto(x - 10, y + 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | I rewrote the colour so I could use it with the move
 }
 
 void Triangle::hide()
@@ -183,7 +182,7 @@ void Smile::show(int lc)
     pieslice(x+3, y - 2, 180, 360, 3);
     line(x - 6, y - 2, x + 6, y - 2);
 
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | I rewrote the colour so I could use it with the move
 }
 
 
@@ -204,9 +203,9 @@ void Smile::hide()
 
 
 //******************************************************
-// kitos funkcijos
+// kitos funkcijos | other functions
 
-void init() // Grafine moda
+void init() // Grafine moda | Graphical mode
 {
     int Gd, Gm, ErCo;
     Gd=DETECT;
@@ -220,8 +219,8 @@ void init() // Grafine moda
 }
 
 //----------------------------------------------------
-void generation(Figure **f, int number) // kaip suprantu
-// dvi zvaigzdes nes i) masyvas siunciamas 2) objektai masyve
+void generation(Figure **f, int number) // kaip suprantu | the way I understood
+// dvi zvaigzdes nes i) masyvas siunciamas ii) objektai masyve | two stars because i) the array is sent ii) the objects in the array
 {
     for (int i = 0; i < number; i++)
     {
@@ -241,7 +240,7 @@ void generation(Figure **f, int number) // kaip suprantu
         }
 	if (f[i] == 0)
         {
-            printf("Klaida talpinant figuras i masyva\n");
+            printf("Error placing shapes in an array\n");
             exit(1);
         }
     }
