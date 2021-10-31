@@ -1,7 +1,8 @@
 //
 // Problem_18.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas on 31/10/21.
 
 #ifndef PLOT_H
 #define PLOT_H
@@ -19,7 +20,7 @@ void init();
 class Plot
 {
 public:
-    Plot(int lxp, int lyp,int xd, int yd, // lango matmenys pixeliais
+    Plot(int lxp, int lyp,int xd, int yd, // lango matmenys pilkseliais | window dimensions in pixels
          double lminX, double lmaxX, double ldeltaX,
          double lminY, double lmaxY, double ldeltaY,
          int lsp, int lspt);
@@ -54,8 +55,8 @@ private:
 
 // plot.cpp
 // class Plot
-// Grafiko langas
-// is Algirdo Matulio knygos Mokomes programuoti 128 psl.
+// Grafiko langas | Graph window
+// is Algirdo Matulio knygos Mokomes programuoti 128 psl. | from Algirdas Matulis' book "We are learning to program" 128 pages.
 
 //#include "plot.h"
 
@@ -74,28 +75,28 @@ void init() // Grafine moda
 }
 
 // Klases Plot funkcijos ******************************
-Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pixeliais
+Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pikseliais | window dimensions in pixels
            double lminX, double lmaxX, double ldeltaX,
            double lminY, double lmaxY, double ldeltaY,
            int lsp, int lspt)
 {
     xp = lxp;
     yp = lyp;
-    xg = xp + xd; // pixeliais
-    yg = yp + yd; // pixeliais
+    xg = xp + xd; // pixeliais | pixels
+    yg = yp + yd; // pixeliais | pixels
     sp = lsp; // fillstyle number
     spt = lspt;
-    minX = lminX; // vienetais x asyje
-    maxX = lmaxX; // vienetais x asyje
-    deltaX = ldeltaX; // groteliu plotis
-    minY = lminY; // vienetais y asyje
-    maxY = lmaxY; // vienetais y asyje
+    minX = lminX; // vienetais x asyje | units in the x-axis
+    maxX = lmaxX; // vienetais x asyje | units in the x-axis
+    deltaX = ldeltaX; // groteliu plotis | grid width
+    minY = lminY; // vienetais y asyje | units in the x-axis
+    maxY = lmaxY; // vienetais y asyje | units in the x-axis
     deltaY = ldeltaY; // groteliu plotis
 
-    // daugini atstuma x vienetais is XtoP ir gauni pixelius
+    // daugini atstuma x vienetais is XtoP ir gauni pixkselius | multiply the distance in x units from XtoP and you get pixels
     XtoP = ((double)(xg - xp - 39)) / (maxX - minX);
 
-    // daugini atstuma y vienetais is XtoP ir gauni pixelius
+    // daugini atstuma y vienetais is YtoP ir gauni pikselius | multiply the distance in y units from YtoP and you get pixels
     YtoP = ((double)(yg - yp - 39)) / (maxY - minY);
 
 }
@@ -107,15 +108,15 @@ void Plot::on()
     int r, l, rb;
     char s[20]; // for storing floats as strings later
 
-    // visa (max) ekrana uzpildau pasirinkta spalva
+    // visa (max) ekrana uzpildau pasirinkta spalva | the entire (max) screen filled with the selected color
     setviewport(0, 0, getmaxx(), getmaxy(), 1); // max screen coord.
-    // sita perkelciau i atskira funkcija
-    // jei butu poreikis kelis subplots padaryti
+    // sita perkelciau i atskira funkcija | I moved this to a separate function
+    // jei butu poreikis kelis subplots padaryti | if there would be a need for multiple subplots to do
     setfillstyle(SOLID_FILL, sp); //set the current viewport for
     // graphics output, absolute coord
     bar(xp, yp, xg, yg); // rectangle filled
 
-    // pasirinkta staciakampi (pixeliais) apibreziu remu
+    // pasirinkta staciakampi (pikseliais) apibreziu remu | selected rectangular (in pixels) frame
     setviewport(xp, yp, xg, yg, 1);
     Xst = deltaX * ceil(minX / deltaX);// pirmo bruksneliu padetis
     Yst = deltaY * ceil(minY / deltaY); // pirmo bruksneliu padetis
