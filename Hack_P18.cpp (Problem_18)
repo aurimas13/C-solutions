@@ -61,7 +61,7 @@ private:
 //#include "plot.h"
 
 //******************************************************
-void init() // Grafine moda
+void init() // Grafine moda | Graphical mode
 {
     int Gd, Gm, ErCo;
     Gd=DETECT;
@@ -69,7 +69,7 @@ void init() // Grafine moda
     ErCo=graphresult();
     if ( ErCo != grOk)
     {
-        printf("Nera grafikos");
+        printf("Nera grafikos (No graphics)");
         exit(1);
     }
 }
@@ -91,7 +91,7 @@ Plot::Plot(int lxp, int lyp, int xd, int yd, // lango matmenys pikseliais | wind
     deltaX = ldeltaX; // groteliu plotis | grid width
     minY = lminY; // vienetais y asyje | units in the x-axis
     maxY = lmaxY; // vienetais y asyje | units in the x-axis
-    deltaY = ldeltaY; // groteliu plotis
+    deltaY = ldeltaY; // groteliu plotis | grid width
 
     // daugini atstuma x vienetais is XtoP ir gauni pixkselius | multiply the distance in x units from XtoP and you get pixels
     XtoP = ((double)(xg - xp - 39)) / (maxX - minX);
@@ -112,7 +112,7 @@ void Plot::on()
     setviewport(0, 0, getmaxx(), getmaxy(), 1); // max screen coord.
     // sita perkelciau i atskira funkcija | I moved this to a separate function
     // jei butu poreikis kelis subplots padaryti | if there would be a need for multiple subplots to do
-    setfillstyle(SOLID_FILL, sp); //set the current viewport for
+    setfillstyle(SOLID_FILL, sp); // set the current viewport for
     // graphics output, absolute coord
     bar(xp, yp, xg, yg); // rectangle filled
 
@@ -122,12 +122,12 @@ void Plot::on()
     Yst = deltaY * ceil(minY / deltaY); // pirmo bruksneliu padetis
     setcolor(0);
     setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
-    rectangle(20, 20, xg - xp - 20, yg - yp - 19);// remas
+    rectangle(20, 20, xg - xp - 20, yg - yp - 19);// remas | frame
 
-    // X asies pavadinimai
+    // X asies pavadinimai | X axis names
     for (a = Xst; a < maxX; a += deltaX)
     {
-        r = fx(a); // zingsniuoju pasirinktais vnt, bet piesiu pixeliais
+        r = fx(a); // zingsniuoju pasirinktais vnt, bet piesiu pikseliais | step by step on the selected pieces, but I will tie in pixels
         b = fabs(fmod(a, 5 * deltaX)) / deltaX; // absolute, modulo
         if ((b < 0.1) || (b > 4.9))
         {
@@ -142,19 +142,19 @@ void Plot::on()
             l = strlen(s);
             settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 
-            // atspaudinama xticklabel
+            // atspaudinama xticklabel | xticklabel is printed
             outtextxy(r + 16 - l / 2, yg - yp - 10, s);
         }
         else
         {
-            rb = 5; // kiek islinde solid black tik
+            rb = 5; // kiek islinde solid black tik | how much came out the solid black
         }
 
-        // trumpi juodi ticks
-        line(r + 20, 20, r + 20, 20 + rb); // virsuje
-        line(r + 20, yg - yp - 20 - rb, r + 20, yg - yp - 20); // apacioje
+        // trumpi juodi ticks | short black ticks
+        line(r + 20, 20, r + 20, 20 + rb); // virsuje | up
+        line(r + 20, yg - yp - 20 - rb, r + 20, yg - yp - 20); // apacioje | down
 
-        if((r != 0) && (r != xg - xp - 40)) //jei ne remo krastai
+        if((r != 0) && (r != xg - xp - 40)) //jei ne remo krastai | if not frame shores
         {
             setcolor(spt);
             setlinestyle(DOTTED_LINE, 0, NORM_WIDTH);
@@ -164,7 +164,7 @@ void Plot::on()
         }
     }
 
-    // analogiskai su y-asimi
+    // analogiskai su y-asimi | analogously with the y-axis
     for(a = Yst; a < maxY; a += deltaY)
     {
         r = fy(a);
@@ -195,7 +195,7 @@ void Plot::on()
             setlinestyle(DOTTED_LINE, 0, NORM_WIDTH);
             line(xg - xp - 20 - rb, r + 20, 20 + rb, r + 20);
 
-            //return to previous default state
+            // return to the previous default state
             setcolor(0);
             setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
         }
@@ -207,15 +207,15 @@ void Plot::on()
 // ----------------------------------------------------------
 void Plot::act()
 {
-    // paskutinis - clip
-    // activuojama placiau
+    // paskutinis - clip | last - clip
+    // activuojama placiau | activated wider
     setviewport(xp + 20, yp + 20, xg - 20, yg - 20, 1);
 }
 
 // ----------------------------------------------------------
 int Plot::fx(double x)
 {
-    // padeti ekrane pixeliais pakeicia i padet x-asyje (regis)
+    // padeti ekrane pikseliais pakeicia i padetu x-asyje (regis) | position on the screen in pixels replaces i on the x-position (it seems)
     return (int)(floor(XtoP * (x - minX)));
 }
 
@@ -228,7 +228,7 @@ int Plot::fy(double y)
 
 void Plot::point(double x, double y, int spalva)
 {
-    // pades taska tam tikroje vietoje
+    // pades taska tam tikroje vietoje | will put a point in a certain place
     putpixel(fx(x), fy(y), spalva);
 }
 
@@ -270,8 +270,8 @@ void Plot::legend(double x, double y, double pix, char mystr[])
 //  PROG_12.cpp
 //
 //
-//  Created by Rapolas Zilionis on 9/24/18.
-//
+// Created by 
+// Updated by Aurimas Nausedas on 31/10/21.
 
 /*
 #include <stdio.h>
@@ -288,8 +288,8 @@ double fk(double x,double n);
 int main()
 {
 
-    // ivairiaspalves 1/(x/n) funkcijos, kur n = 1,...,5
-    int sk = 500; //zingsniu sk
+    // ivairiaspalves 1/(x/n) funkcijos, kur n = 1,...,5 | multicolor 1 / (x / n) functions, where n = 1, ..., 5
+    int sk = 500; // zingsniu sk | step number
     double  Xmin = 0,
     Xmax = 10,
     Xdel = 1;
@@ -297,17 +297,18 @@ int main()
     Ymax = 10,
     Ydel = 1;
 
-    char leg[20]; // pavadinimams
+    char leg[20]; // pavadinimams | name
 
     double x,f;
-    double h = (Xmax - Xmin) / sk; // Zingsnis
+    double h = (Xmax - Xmin) / sk; // Zingsnis | Step
 
     init();
 
-    Plot T(0,0,getmaxx(),getmaxy(), // Lango matmenys
-           Xmin, Xmax, Xdel,        // X asis
-           Ymin, Ymax, Ydel,        // Y asis
-           15, 13);                 // Fonas ir tinklelis
+    Plot T(0,0,getmaxx(),getmaxy(), // Lango matmenys | Window dimensions
+           Xmin, Xmax, Xdel,        // X asis | X-axis
+           Ymin, Ymax, Ydel,        // Y asis | Y-axis
+           15, 13);                 // Fonas ir tinklelis | Background and grid
+
 
     T.on();
     getch();
