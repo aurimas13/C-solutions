@@ -1,15 +1,16 @@
 //
 // Problem_15.c
 //
-//  Created by Aurimas Nausedas on 9/20/19.
+// Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas 10//31/21.
 
-#include <stdio.h>
+# include <stdio.h>
 
-// Deklaracija -------------------------
+// Deklaracija | Declaration-------------------------
 class Vector
 {
 public:
-    // default konstruktorius (inline)
+    // default konstruktorius (inline) | default constructor
     Vector(){};
     Vector(double x, double y, double z);
     friend Vector operator+(const Vector& A, const Vector& B);
@@ -21,8 +22,8 @@ private:
     double xv,yv,zv;
 };
 
-// Funkcijos ----------------------------
-// konstruktorius
+// Funkcijos | Fucntions ----------------------------
+// konstruktorius | constructor
 Vector::Vector(double x, double y, double z)
 {
     xv = x;
@@ -32,7 +33,7 @@ Vector::Vector(double x, double y, double z)
 
 
 
-// vektoriu suma
+// vektoriu suma | sum of vectors
 Vector operator+(const Vector& A, const Vector& B)
 {
     return Vector(A.xv + B.xv,A.yv + B.yv,A.zv + B.zv);
@@ -40,7 +41,7 @@ Vector operator+(const Vector& A, const Vector& B)
 
 
 
-// vektoriu skaliarine sandauga
+// vektoriu skaliarine sandauga | vector scalar product
 double operator*(const Vector& A, const Vector& B)
 {
     double mult = A.xv * B.xv + A.yv * B.yv + A.zv * B.zv;
@@ -48,7 +49,7 @@ double operator*(const Vector& A, const Vector& B)
 };
 
 
-// vektoriu vector sandauga
+// vektoriu sandauga | vector multiplication
 Vector operator^(const Vector& A, const Vector& B)
 {
 
@@ -61,7 +62,7 @@ Vector operator^(const Vector& A, const Vector& B)
 
 
 
-// show funkcija
+// show funkcija | show function
 void Vector::show(char* s)
 {
     printf("%s: %7.3f %7.3f %7.3f\n",s,xv,yv,zv);
@@ -71,7 +72,7 @@ void Vector::show(char* s)
 int main()
 {
     Vector A(1, 2, 3), B(-4, 2, 1), C;
-    printf("*** Vectoriai 3D*** \n");
+    printf("*** Vectors 3D*** \n");
     A.show("A");
     B.show("B");
     printf("\n");
