@@ -1,7 +1,8 @@
 //
 // Problem_19.cpp
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <conio.h>
@@ -13,7 +14,7 @@
 
 
 //******************************************************
-// klases funkciju apibrezimai
+// klases funkciju apibrezimai | class function definitins
 
 void Figure::move(int ly)
 {
@@ -28,7 +29,7 @@ void Circle::show(int lc) // spalva, nuo 0 iki 16, 0 = juoda.
 {
     setcolor(lc);
     circle(x, y, 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | rewrote the color so I could use it with the move
 }
 
 void Circle::hide()
@@ -42,7 +43,7 @@ void Square::show(int lc)
 {
     setcolor(lc);
     rectangle(x - 10, y - 10, x + 10, y + 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | rewrote the color so I could use it with the move
 }
 
 void Square::hide()
@@ -58,7 +59,7 @@ void Triangle::show(int lc)
     lineto(x, y - 10);
     lineto(x + 10, y + 10);
     lineto(x - 10, y + 10);
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | rewrote the color so I could use it with the move
 }
 
 void Triangle::hide()
@@ -84,7 +85,7 @@ void Smile::show(int lc)
     pieslice(x+3, y - 2, 180, 360, 3);
     line(x - 6, y - 2, x + 6, y - 2);
 
-    c = lc; // perrasau spalva kad galeciau naudoti su move
+    c = lc; // perrasau spalva kad galeciau naudoti su move | rewrote the color so I could use it with the move
 }
 
 
