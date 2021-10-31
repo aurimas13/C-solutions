@@ -2,7 +2,7 @@
 // Problem_15.c
 //
 // Created by Aurimas Nausedas on 9/20/19.
-// Updated by Aurimas Nausedas 10//31/21.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 # include <stdio.h>
 
