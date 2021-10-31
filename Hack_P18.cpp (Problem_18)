@@ -2,7 +2,7 @@
 // Problem_18.c
 //
 // Created by Aurimas A. Nausedas on 9/20/19.
-// Updated by Aurimas A. Nausedas on 10/31/21.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #ifndef PLOT_H
 #define PLOT_H
