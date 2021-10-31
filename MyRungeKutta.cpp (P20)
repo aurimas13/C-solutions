@@ -4,10 +4,11 @@
 // Problem_20.cpp
 //
 //  Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 11/31/21.
 
 #include "MyRungeKutta.hpp"
 
-// funkcijos
+// funkcijos | functions
 void MyRungeKutta::fk(const double *lx, double *lf)
 {
     lf[0] = -lx[1] * a;
