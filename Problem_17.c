@@ -2,6 +2,7 @@
 // Problem_17.c
 //
 // Created by Aurimas Nausedas on 9/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 // Pixel graphics
 
 #include <stdio.h>
@@ -18,14 +19,14 @@ int main()
 {
 
   init(); //I grafine moda
-  //outtextxy(100, 50, "Pikseline Moda");
+  //outtextxy(100, 50, "Pixel Mode");
   getch();
 
   setfillstyle( SOLID_FILL, RED );
   fillellipse(230,330,90,120);
 
-  circle(200, 300, 30); // // Apskritimas
-  circle(260, 300, 30); // Apskritimas
+  circle(200, 300, 30); // // Apskritimas | Circle
+  circle(260, 300, 30); // Apskritimas | Circle
   circle(215, 285, 8);
   circle(275, 285, 8);
 
@@ -35,10 +36,10 @@ int main()
   lineto(250,250);
   lineto(275,260);
 
-  //burna
+  // burna | mouth
   line(200,380,260,400);
 
-  // mintys
+  // mintys | thoughts
   setlinestyle(0, 0, NORM_WIDTH);
   //setfillstyle(SOLID_FILL, WHITE);
 
@@ -54,10 +55,10 @@ int main()
   ellipse(380,100,0,360,120,60);
   getch();
 
-  // tekstas:
+  // tekstas: | text:
   changetextstyle(0, HORIZ_DIR, 2);
-  outtextxy(310, 80, "Ka gi cia");
-  outtextxy(305, 100, "nupiesus?..");
+  outtextxy(310, 80, "What");
+  outtextxy(305, 100, "to draw?..");
   getch();
 
   closegraph() ;
