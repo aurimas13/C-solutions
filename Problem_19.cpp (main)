@@ -1,7 +1,8 @@
 //
-//  Problem_19.cpp (main)
+// Problem_19.cpp (main)
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <conio.h>
@@ -12,7 +13,7 @@
 #include "PROBLEM_19_FUNK.h"
 
 
-// deklaruoju pagalbines funkcijas
+// deklaruoju pagalbines funkcijas | declaring helper functions
 void init();
 void generation(Figure **f, int number);
 
@@ -20,15 +21,16 @@ int main()
 {
     const int number = 21;
     double t;
-    int randcol; // atsitiktine spalva
+    int randcol; // atsitiktine spalva | arbitrary colour
 
-    // alokuoju rodykle is Figure klases objekta
+    // alokuoju rodykle is Figure klases objekta | allocate an arrow from the Figure class object
     Figure *f[number];
 
-    // inicializuoja grafini langa
+    // inicializuoja grafini langa | initializes the graphical window
+    init ();
     init();
 
-    // uzpildau masyva isvestiniai Figure objektais
+    // uzpildau masyva isvestiniai Figure objektais | fill an array of derived Figure objects
     generation(f, number);
 
     for(int i = 0; i < number; i++)
@@ -46,7 +48,7 @@ int main()
             f[i] -> move(-50 * sin(0.5 * i - t) + 240);
 
         }
-    } while (!kbhit()); // kol nenuspaude mygtuko
+    } while (!kbhit()); // kol nenuspaude mygtuko | until you press the button
     getch();
 
     closegraph();
@@ -60,7 +62,7 @@ int main()
 //******************************************************
 // pagalbines funkcijos
 
-void init() // Grafine moda
+void init() // Grafine moda | Graphical mode
 {
     int Gd, Gm, ErCo;
     Gd=DETECT;
@@ -68,14 +70,14 @@ void init() // Grafine moda
     ErCo=graphresult();
     if ( ErCo != grOk)
     {
-        printf("Nera grafikos");
+        printf("No graphics");
         exit(1);
     }
 }
 
 //----------------------------------------------------
-void generation(Figure **f, int number) // kaip suprantu
-// dvi zvaigzdes nes i) masyvas siunciamas 2) objektai masyve
+void generation(Figure **f, int number) // kaip suprantu | as I understand
+// dvi zvaigzdes nes i) masyvas siunciamas ii) objektai masyve | two stars because i) the array is sent ii) the objects in the array
 {
     for (int i = 0; i < number; i++)
     {
@@ -95,7 +97,7 @@ void generation(Figure **f, int number) // kaip suprantu
         }
         if (f[i] == 0)
         {
-            printf("Klaida talpinant figuras i masyva\n");
+            printf("Error placing shapes in array\n");
             exit(1);
         }
     }
