@@ -1,15 +1,17 @@
 //
 // Problem_19_Funk.h
 //
-//  Created by Aurimas Nausedas on 9/28/19.
+// Created by Aurimas Nausedas on 9/28/19.
+// Updated by Aurimas Nausedas on 10.31/21.
 
 #ifndef PROBLEM_19_FUNK_h
 #define PROBLEM_19_FUNK_h
 
 #include <stdio.h>
 
-// deklaruoju klases
-// pagrindine
+// deklaruoju klases | declaring classes
+// pagrindine | main
+
 class Figure
 {
 public:
@@ -19,11 +21,11 @@ public:
     virtual void hide() = 0;
 protected:
     int x,y,c;
-    // spalva
+    // spalva | colour
 };
 
 // ------------------------------------------------------
-// isvestines klases
+// isvestines klases | derived classes
 
 class Circle : public Figure
 {
