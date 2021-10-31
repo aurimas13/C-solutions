@@ -1,7 +1,8 @@
 //
 // Problem_24.cpp
 //
-//  Created by Aurimas Nausedas on 10/20/19.
+// Created by Aurimas Nausedas on 10/20/19.
+// Updated by Aurimas Nausedas on 10/31/21.
 
 #include <stdio.h>
 #include <iostream>
