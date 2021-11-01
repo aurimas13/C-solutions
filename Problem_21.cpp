@@ -1,8 +1,8 @@
 //
 // Problem_21.cpp
 //
-// Created by Aurimas Nausedas on 10/09/19. 
-// Update by Aurimas Nausedas onn 10/31/21.
+// Created by Aurimas A. Nausedas on 10/09/19. 
+// Update by Aurimas A. Nausedas onn 10/31/21.
 
 #include <stdio.h>
 #include <stdlib.h>
