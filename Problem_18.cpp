@@ -1,8 +1,8 @@
 //
 // Problem_18.cpp
 //
-// Created by Aurimas Nausedas on 9/20/19.
-// Updated by Aurimas Nausedas 10/31/21.
+// Created by Aurimas A. Nausedas on 9/20/19.
+// Updated by Aurimas A. Nausedas 10/31/21.
 
 #include <stdio.h>
 #include <conio.h>
