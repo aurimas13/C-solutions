@@ -1,8 +1,8 @@
 //
 // Problem_14.c
 //
-// Created by Aurimas Nausedas on 9/23/19.
-// Updated by Aurimas Nausedas on 31/10/21.
+// Created by Aurimas A. Nausedas on 9/23/19.
+// Updated by Aurimas A. Nausedas on 10/31/21.
 
 
 #include <stdio.h>
