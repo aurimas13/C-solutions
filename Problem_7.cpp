@@ -1,7 +1,7 @@
 // Problem_7.c
 //
-// Created by Aurimas Nausedas on 9/19/19.
-// Updated by Aurimas NAusedas on 10/31/21.
+// Created by Aurimas A. Nausedas on 9/19/19.
+// Updated by Aurimas A. Nusedas on 10/31/21.
 
 #include <stdio.h>
 
