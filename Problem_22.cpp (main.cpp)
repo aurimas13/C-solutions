@@ -3,8 +3,8 @@
 //
 // Problem_22
 //
-// Created by Aurimas Nausedas on 10/15/19.
-// Updated by Aurimas Nausecxdas 10/31/21.
+// Created by Aurimas A. Nausedas on 10/15/19.
+// Updated by Aurimas A. Nausedas on 10/31/21.
 
 #include <iostream>
 #include <iomanip> // kad galeciau kontroliuoti formatavima | so I can control formatting
