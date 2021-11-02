@@ -1,6 +1,6 @@
 //
 // Problem_24.cpp
-// 
+//  
 // Created by Aurimas A. Nausedas on 10/20/19.
 // Updated by Aurimas A. Nausedas on 10/31/21.
 
