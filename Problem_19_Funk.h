@@ -1,6 +1,6 @@
 //
 // Problem_19_Funk.h
-//
+// 
 // Created by Aurimas A. Nausedas on 9/28/19.
 // Updated by Aurimas A. Nausedas on 10/31/21.
 
