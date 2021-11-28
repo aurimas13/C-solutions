@@ -1,8 +1,9 @@
 # Solutions of C/C++ exercises/projects#
 
-I am a Research Engineer at Vilnius University (VU) working on programming, bioinformatics and ML project involving scRNA analysis by writing codes, analyses and scripting with Python and C++.
-
-Here are the C/C++ solutions of the problems given by the Physics Department on the C/C++ programming course when I worked at VU as Doctoral Researcher. Here you will find a total of 24 solved problems throughout my work as RA & RE from 2015 to 2020.
+<!-- While being a Research Engineer at Vilnius University (VU) I worked on computing, bioinformatics and ML projects, of which the current one involves analysis of scRNA by writing codes, analyses and scripting with Python and C++.
+ -->
+ 
+Here are the C/C++ solutions of the problems given by the Physics Department on the C/C++ programming course when I worked at Vilnius University as a Doctoral Researcher. Here you will find a total of 24 solved problems throughout my work as Research Associate & Research Engineer from 2016 to 2020.
 
 Explanations are in English and Lithuanian. 
 
