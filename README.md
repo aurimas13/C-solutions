@@ -1,4 +1,4 @@
-# Solutions of C/C++ exercises/projects#
+# Solutions of C/C++ exercises/projects
 
 <!-- While being a Research Engineer at Vilnius University (VU) I worked on computing, bioinformatics and ML projects, of which the current one involves analysis of scRNA by writing codes, analyses and scripting with Python and C++.
  -->
