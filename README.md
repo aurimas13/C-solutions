@@ -1,5 +1,5 @@
 <p align=center>
-  <img height="300px" src=https://github.com/aurimas13/C-solutions/blob/main/public/images/cpppp.png"/>
+  <img height="300px" src="https://github.com/aurimas13/C-solutions/blob/main/public/images/cpppp.png"/>
 </p>
 
 <p align="center" > <b>Solutions to C/C++ problems </b> </p>
